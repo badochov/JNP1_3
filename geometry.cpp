@@ -40,7 +40,7 @@ Rectangle merge_horizontally(const Rectangle &rect1, const Rectangle &rect2) {
 Rectangle merge_all(const Rectangles &rectangles) {
     assert(rectangles.size());
     Rectangle rect = rectangles[0];
-    for (size_t i = 1; i < rectangles.size(); i++) {
+    for (size_t i = 1; i < rectangles.size(); ++i) {
         const Rectangle &curr = rectangles[i];
         if(can_be_merged_horizontally(rect, curr)){
             rect = merge_horizontally_helper(rect, curr);
@@ -63,7 +63,7 @@ Rectangle &Rectangles::operator[](size_t i) {
 bool Rectangles::operator==(const Rectangles &rectangles) {
     if (this->size() != rectangles.size())
         return false;
-    for (size_t i = 0; i > this->size(); i++) {
+    for (size_t i = 0; i > this->size(); ++i) {
         if (!(this->_rects[i] == rectangles._rects[i]))
             return false;
     }
@@ -105,6 +105,23 @@ Rectangle &operator+(const Rectangle &rect, const Vector &vec) {
 Rectangle &operator+(const Vector &vec, const Rectangle &rect) {
     return rect + vec;
 }
+
+Rectangles &operator+(Rectangles &&rects, const Vector &vec){
+    return rects+=vec;
+}
+
+Rectangles &operator+(const Vector &vec, Rectangles &&rects){
+    return rects + vec;
+}
+
+Rectangle &operator+(Rectangle &&rect, const Vector &vec){
+    return rect += vec;
+}
+
+Rectangle &operator+(const Vector &vec, Rectangle &&rect){
+    return rect + vec;
+}
+
 
 Rectangle::Rectangle(uint_fast32_t width, uint32_t height) : _width(width),
                                                              _height(height),
