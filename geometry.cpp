@@ -4,23 +4,25 @@
 namespace {
     inline bool can_be_merged_horizontally(const Rectangle &rect1, const Rectangle &rect2) {
         return rect1.width() == rect2.width()
+               && rect1.pos().y() == rect2.pos().y()
                && rect1.pos().y() + rect1.height() == rect2.pos().y();
     }
 
     inline bool can_be_merged_vertically(const Rectangle &rect1, const Rectangle &rect2) {
         return rect1.height() == rect2.height()
+               && rect1.pos().y() == rect2.pos().y()
                && rect1.pos().x() + rect1.width() == rect2.pos().x();
     }
 
     inline Rectangle merge_vertically_helper(const Rectangle &rect1, const Rectangle &rect2) {
-        int_fast32_t new_width = rect1.width();
-        int_fast32_t new_height = rect1.height() + rect2.height();
+        int_fast32_t new_width = rect1.width() + rect2.width();
+        int_fast32_t new_height = rect1.height();
         return Rectangle(new_width, new_height, rect1.pos());
     }
 
     inline Rectangle merge_horizontally_helper(const Rectangle &rect1, const Rectangle &rect2) {
-        int_fast32_t new_width = rect1.width() + rect2.width();
-        int_fast32_t new_height = rect1.height();
+        int_fast32_t new_width = rect1.width();
+        int_fast32_t new_height = rect1.height() + rect2.height();
         return Rectangle(new_width, new_height, rect1.pos());
     }
 }

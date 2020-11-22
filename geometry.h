@@ -106,8 +106,4 @@ Rectangles &operator+(Rectangles &&rects, const Vector &vec);
 
 Rectangles &operator+(const Vector &vec, Rectangles &&rects);
 
-Rectangle &operator+(Rectangle &&rect, const Vector &vec);
-
-Rectangle &operator+(const Vector &vec, Rectangle &&rect);
-
 #endif //JNP1_3_GEOMETRY_H
