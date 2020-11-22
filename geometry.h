@@ -2,7 +2,7 @@
 #define JNP1_3_GEOMETRY_H
 
 #include <initializer_list>
-#include<cstddef>
+#include <cstddef>
 #include <vector>
 #include <cstdint>
 

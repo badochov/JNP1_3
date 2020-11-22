@@ -42,10 +42,9 @@ Rectangle merge_all(const Rectangles &rectangles) {
     Rectangle rect = rectangles[0];
     for (size_t i = 1; i < rectangles.size(); ++i) {
         const Rectangle &curr = rectangles[i];
-        if(can_be_merged_horizontally(rect, curr)){
+        if (can_be_merged_horizontally(rect, curr)) {
             rect = merge_horizontally_helper(rect, curr);
-        }
-        else{
+        } else {
             rect = merge_vertically(rect, curr);
         }
     }
@@ -57,7 +56,7 @@ Rectangles::Rectangles(std::initializer_list<Rectangle> rects) : _rects(rects) {
 
 
 Rectangle &Rectangles::operator[](size_t i) {
-    return this->_rects[i];
+    return this->_rects.at(i);
 }
 
 bool Rectangles::operator==(const Rectangles &rectangles) {
@@ -106,30 +105,30 @@ Rectangle &operator+(const Vector &vec, const Rectangle &rect) {
     return rect + vec;
 }
 
-Rectangles &operator+(Rectangles &&rects, const Vector &vec){
-    return rects+=vec;
+Rectangles &operator+(Rectangles &&rects, const Vector &vec) {
+    return rects += vec;
 }
 
-Rectangles &operator+(const Vector &vec, Rectangles &&rects){
+Rectangles &operator+(const Vector &vec, Rectangles &&rects) {
     return rects + vec;
 }
 
-Rectangle &operator+(Rectangle &&rect, const Vector &vec){
+Rectangle &operator+(Rectangle &&rect, const Vector &vec) {
     return rect += vec;
 }
 
-Rectangle &operator+(const Vector &vec, Rectangle &&rect){
+Rectangle &operator+(const Vector &vec, Rectangle &&rect) {
     return rect + vec;
 }
 
 
 Rectangle::Rectangle(int_fast32_t width, int32_t height) : _width(width),
-                                                             _height(height),
-                                                             _left_bottom_corner(Position(0, 0)) {};
+                                                           _height(height),
+                                                           _left_bottom_corner(Position(0, 0)) {};
 
 Rectangle::Rectangle(int_fast32_t width, int32_t height, Position pos) : _width(width),
-                                                                           _height(height),
-                                                                           _left_bottom_corner(pos) {};
+                                                                         _height(height),
+                                                                         _left_bottom_corner(pos) {};
 
 bool Rectangle::operator==(const Rectangle &rect) const {
     return this->_left_bottom_corner == rect._left_bottom_corner
