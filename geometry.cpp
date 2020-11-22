@@ -30,24 +30,24 @@ Vector::Vector(int_fast32_t x, int_fast32_t y): _x(x), _y(y) {}
 Vector::Vector(Position point): _x(point.x()), _y(point.y()) {}
 
 int_fast32_t Vector::x() const {
-    return _x;
+    return this->_x;
 }
 
 int_fast32_t Vector::y() const {
-    return _y;
+    return this->_y;
 }
 
 Vector Vector::reflection() const {
-    return Vector(_y, _x);
+    return Vector(this->_y, this->_x);
 }
 
 bool Vector::operator==(const Vector &other) const {
-    return _x == other.x() && _y == other.y();
+    return this->_x == other._x && this->_y == other._y;
 }
 
 Vector &Vector::operator+=(const Vector &other) {
-    _x += other.x();
-    _y += other.y();
+    this->_x += other._x;
+    this->_y += other._y;
     return *this;
 }
 
@@ -61,23 +61,23 @@ const Position &Position::origin() {
 }
 
 int_fast32_t Position::x() const {
-    return _vec.x();
+    return this->_vec.x();
 }
 
 int_fast32_t Position::y() const {
-    return _vec.y();
+    return this->_vec.y();
 }
 
 Position Position::reflection() const{
-    return Position(_vec.reflection());
+    return Position(this->_vec.reflection());
 }
 
 bool Position::operator==(const Position &other) const {
-    return _vec == other._vec;
+    return this->_vec == other._vec;
 }
 
 Position &Position::operator+=(const Vector &vector) {
-    _vec += vector;
+    this->_vec += vector;
     return *this;
 }
 
