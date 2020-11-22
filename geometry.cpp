@@ -27,7 +27,7 @@ namespace {
 
 Vector::Vector(int_fast32_t x, int_fast32_t y): _x(x), _y(y) {};
 
-Vector::Vector(Position point_fast32_t): _x(point_fast32_t.x()), _y(point_fast32_t.y()) {};
+Vector::Vector(Position point): _x(point.x()), _y(point.y()) {};
 
 int_fast32_t Vector::x() const {
     return _x;

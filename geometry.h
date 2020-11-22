@@ -12,7 +12,7 @@ class Vector {
 public:
     Vector(int_fast32_t x, int_fast32_t y);
 
-    explicit Vector(Position point_fast32_t);
+    explicit Vector(Position point);
 
     int_fast32_t x() const;
 
