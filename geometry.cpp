@@ -25,9 +25,9 @@ namespace {
     }
 }
 
-Vector::Vector(int_fast32_t x, int_fast32_t y): _x(x), _y(y) {};
+Vector::Vector(int_fast32_t x, int_fast32_t y): _x(x), _y(y) {}
 
-Vector::Vector(Position point): _x(point.x()), _y(point.y()) {};
+Vector::Vector(Position point): _x(point.x()), _y(point.y()) {}
 
 int_fast32_t Vector::x() const {
     return _x;
@@ -51,9 +51,9 @@ Vector &Vector::operator+=(const Vector &other) {
     return *this;
 }
 
-Position::Position(int_fast32_t x, int_fast32_t y): _vec(x, y) {};
+Position::Position(int_fast32_t x, int_fast32_t y): _vec(x, y) {}
 
-Position::Position(Vector vec): _vec(vec) {};
+Position::Position(Vector vec): _vec(vec) {}
 
 const Position &Position::origin() {
     static Position morigin = Position(0, 0);
@@ -119,7 +119,7 @@ Rectangle merge_all(const Rectangles &rectangles) {
     return rect;
 }
 
-Rectangles::Rectangles(std::initializer_list<Rectangle> rects) : _rects(rects) {};
+Rectangles::Rectangles(std::initializer_list<Rectangle> rects) : _rects(rects) {}
 
 
 Rectangle &Rectangles::operator[](size_t i) {
@@ -191,11 +191,11 @@ Rectangle &operator+(const Vector &vec, Rectangle &&rect) {
 
 Rectangle::Rectangle(int_fast32_t width, int32_t height) : _width(width),
                                                            _height(height),
-                                                           _left_bottom_corner(Position(0, 0)) {};
+                                                           _left_bottom_corner(Position(0, 0)) {}
 
 Rectangle::Rectangle(int_fast32_t width, int32_t height, Position pos) : _width(width),
                                                                          _height(height),
-                                                                         _left_bottom_corner(pos) {};
+                                                                         _left_bottom_corner(pos) {}
 
 bool Rectangle::operator==(const Rectangle &rect) const {
     return this->_left_bottom_corner == rect._left_bottom_corner
