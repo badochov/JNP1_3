@@ -29,6 +29,8 @@ public:
     bool operator==(const Position &rect) const;
 
     Position &operator+=(const Vector &vec);
+
+    static const Position &origin();
 };
 
 class Rectangle {

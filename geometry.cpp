@@ -118,7 +118,7 @@ Rectangles &&operator+(const Vector &vec, Rectangles &&rects) {
 
 Rectangle::Rectangle(int_fast32_t width, int32_t height) : _width(width),
                                                            _height(height),
-                                                           _left_bottom_corner(Position(0, 0)) {}
+                                                           _left_bottom_corner(Position::origin()) {}
 
 Rectangle::Rectangle(int_fast32_t width, int32_t height, Position pos) : _width(width),
                                                                          _height(height),
