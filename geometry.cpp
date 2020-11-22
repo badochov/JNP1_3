@@ -107,22 +107,22 @@ Rectangle &operator+(const Vector &vec, const Rectangle &rect) {
     return rect + vec;
 }
 
-Rectangles &operator+(Rectangles &&rects, const Vector &vec) {
-    return rects += vec;
+Rectangles &&operator+(Rectangles &&rects, const Vector &vec) {
+    return std::move(rects += vec);
 }
 
-Rectangles &operator+(const Vector &vec, Rectangles &&rects) {
+Rectangles &&operator+(const Vector &vec, Rectangles &&rects) {
     return std::move(rects) + vec;
 }
 
 
 Rectangle::Rectangle(int_fast32_t width, int32_t height) : _width(width),
                                                            _height(height),
-                                                           _left_bottom_corner(Position(0, 0)) {};
+                                                           _left_bottom_corner(Position(0, 0)) {}
 
 Rectangle::Rectangle(int_fast32_t width, int32_t height, Position pos) : _width(width),
                                                                          _height(height),
-                                                                         _left_bottom_corner(pos) {};
+                                                                         _left_bottom_corner(pos) {}
 
 bool Rectangle::operator==(const Rectangle &rect) const {
     return this->_left_bottom_corner == rect._left_bottom_corner
