@@ -112,15 +112,7 @@ Rectangles &operator+(Rectangles &&rects, const Vector &vec) {
 }
 
 Rectangles &operator+(const Vector &vec, Rectangles &&rects) {
-    return rects + vec;
-}
-
-Rectangle &operator+(Rectangle &&rect, const Vector &vec) {
-    return rect += vec;
-}
-
-Rectangle &operator+(const Vector &vec, Rectangle &&rect) {
-    return rect + vec;
+    return std::move(rects) + vec;
 }
 
 
