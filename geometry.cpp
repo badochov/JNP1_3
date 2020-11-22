@@ -25,6 +25,73 @@ namespace {
     }
 }
 
+Vector::Vector(int_fast32_t x, int_fast32_t y): _x(x), _y(y) {};
+
+Vector::Vector(Position point_fast32_t): _x(point_fast32_t.x()), _y(point_fast32_t.y()) {};
+
+int_fast32_t Vector::x() const {
+    return _x;
+}
+
+int_fast32_t Vector::y() const {
+    return _y;
+}
+
+Vector Vector::reflection() const {
+    return Vector(_y, _x);
+}
+
+bool Vector::operator==(const Vector &other) const {
+    return _x == other.x() && _y == other.y();
+}
+
+Vector &Vector::operator+=(const Vector &other) {
+    _x += other.x();
+    _y += other.y();
+    return *this;
+}
+
+Position::Position(int_fast32_t x, int_fast32_t y): _vec(x, y) {};
+
+Position::Position(Vector vec): _vec(vec) {};
+
+const Position& Position::origin() {
+    static Position morigin = Position(0, 0);
+    return morigin;
+}
+
+int_fast32_t Position::x() const {
+    return _vec.x();
+}
+
+int_fast32_t Position::y() const {
+    return _vec.y();
+}
+
+Position Position::reflection() const{
+    return Position(_vec.reflection());
+}
+
+bool Position::operator==(const Position &other) const {
+    return _vec == other._vec;
+}
+
+Position &Position::operator+=(const Vector &vector) {
+    _vec += vector;
+    return *this;
+}
+
+Vector &operator+(const Vector &vec1, const Vector &vec2) {
+    return Vector(vec1) += vec2;
+}
+
+Position &operator+(const Position &point, const Vector &vec) {
+    return Position(point) += vec;
+}
+
+Position &operator+(const Vector &vec, const Position &point) {
+    return point + vec;
+}
 
 Rectangle merge_vertically(const Rectangle &rect1, const Rectangle &rect2) {
     assert(can_be_merged_vertically(rect1, rect2));
@@ -52,7 +119,7 @@ Rectangle merge_all(const Rectangles &rectangles) {
     return rect;
 }
 
-Rectangles::Rectangles(std::initializer_list<Rectangle> rects) : _rects(rects) {}
+Rectangles::Rectangles(std::initializer_list<Rectangle> rects) : _rects(rects) {};
 
 
 Rectangle &Rectangles::operator[](size_t i) {

@@ -6,29 +6,49 @@
 #include <vector>
 #include <cstdint>
 
+class Position;
 
 class Vector {
 public:
-    Vector reflection() const;
+    Vector(int_fast32_t x, int_fast32_t y);
+
+    explicit Vector(Position point_fast32_t);
 
     int_fast32_t x() const;
 
     int_fast32_t y() const;
+
+    Vector reflection() const;
+
+    bool operator==(const Vector &other) const;
+
+    Vector &operator+=(const Vector &other);
+
+private:
+    int_fast32_t _x;
+    int_fast32_t _y;
 };
 
 class Position {
 public:
     Position(int_fast32_t x, int_fast32_t y);
 
-    Position reflection() const;
+    explicit Position(Vector vec);
 
     int_fast32_t x() const;
 
     int_fast32_t y() const;
 
-    bool operator==(const Position &rect) const;
+    Position reflection() const;
+
+    bool operator==(const Position &other) const;
 
     Position &operator+=(const Vector &vec);
+
+    static const Position& origin();
+
+private:
+    Vector _vec;
 };
 
 class Rectangle {
@@ -109,5 +129,11 @@ Rectangles &operator+(const Vector &vec, Rectangles &&rects);
 Rectangle &operator+(Rectangle &&rect, const Vector &vec);
 
 Rectangle &operator+(const Vector &vec, Rectangle &&rect);
+
+Vector &operator+(const Vector &vec1, const Vector &vec2);
+
+Position &operator+(const Position &point, const Vector &vec);
+
+Position &operator+(const Vector &vec, const Position &point);
 
 #endif //JNP1_3_GEOMETRY_H
