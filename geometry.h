@@ -125,14 +125,9 @@ Rectangle &operator+(const Rectangle &rect, const Vector &vec);
 
 Rectangle &operator+(const Vector &vec, const Rectangle &rect);
 
+Rectangles &&operator+(Rectangles &&rects, const Vector &vec);
 
-Rectangles &operator+(Rectangles &&rects, const Vector &vec);
-
-Rectangles &operator+(const Vector &vec, Rectangles &&rects);
-
-Rectangle &operator+(Rectangle &&rect, const Vector &vec);
-
-Rectangle &operator+(const Vector &vec, Rectangle &&rect);
+Rectangles &&operator+(const Vector &vec, Rectangles &&rects);
 
 Vector &operator+(const Vector &vec1, const Vector &vec2);
 
