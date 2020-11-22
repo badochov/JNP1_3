@@ -53,9 +53,9 @@ private:
 
 class Rectangle {
 public:
-    Rectangle(int_fast32_t width, int32_t height);
+    Rectangle(int_fast32_t width, int_fast32_t height);
 
-    Rectangle(int_fast32_t width, int32_t height, Position pos);
+    Rectangle(int_fast32_t width, int_fast32_t height, Position pos);
 
     Rectangle(const Rectangle &) = default;
 

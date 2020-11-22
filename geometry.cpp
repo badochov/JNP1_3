@@ -183,13 +183,13 @@ Rectangles &&operator+(const Vector &vec, Rectangles &&rects) {
 }
 
 
-Rectangle::Rectangle(int_fast32_t width, int32_t height) : _width(width),
+Rectangle::Rectangle(int_fast32_t width, int_fast32_t height) : _width(width),
                                                            _height(height),
                                                            _left_bottom_corner(Position::origin()) {
     assert(width > 0 && height > 0);
 }
 
-Rectangle::Rectangle(int_fast32_t width, int32_t height, Position pos) : _width(width),
+Rectangle::Rectangle(int_fast32_t width, int_fast32_t height, Position pos) : _width(width),
                                                                          _height(height),
                                                                          _left_bottom_corner(pos) {
     assert(width > 0 && height > 0);
