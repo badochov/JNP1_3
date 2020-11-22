@@ -73,6 +73,8 @@ public:
 
     Rectangle &operator+=(const Vector &vec);
 
+    Rectangle &operator=(const Rectangle &r) = default;
+
     Rectangle &operator=(Rectangle &&r) = default;
 
     int_fast64_t area() const;
@@ -100,6 +102,8 @@ public:
     Rectangles &operator+=(const Vector &vec);
 
     size_t size() const;
+
+    Rectangles &operator=(const Rectangles &rhs) = default;
 
     Rectangles &operator=(Rectangles &&rhs) noexcept;
 
