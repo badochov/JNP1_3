@@ -13,14 +13,14 @@ namespace {
     }
 
     inline Rectangle merge_vertically_helper(const Rectangle &rect1, const Rectangle &rect2) {
-        uint_fast32_t new_width = rect1.width();
-        uint_fast32_t new_height = rect1.height() + rect2.height();
+        int_fast32_t new_width = rect1.width();
+        int_fast32_t new_height = rect1.height() + rect2.height();
         return Rectangle(new_width, new_height, rect1.pos());
     }
 
     inline Rectangle merge_horizontally_helper(const Rectangle &rect1, const Rectangle &rect2) {
-        uint_fast32_t new_width = rect1.width() + rect2.width();
-        uint_fast32_t new_height = rect1.height();
+        int_fast32_t new_width = rect1.width() + rect2.width();
+        int_fast32_t new_height = rect1.height();
         return Rectangle(new_width, new_height, rect1.pos());
     }
 }
@@ -123,11 +123,11 @@ Rectangle &operator+(const Vector &vec, Rectangle &&rect){
 }
 
 
-Rectangle::Rectangle(uint_fast32_t width, uint32_t height) : _width(width),
+Rectangle::Rectangle(int_fast32_t width, int32_t height) : _width(width),
                                                              _height(height),
                                                              _left_bottom_corner(Position(0, 0)) {};
 
-Rectangle::Rectangle(uint_fast32_t width, uint32_t height, Position pos) : _width(width),
+Rectangle::Rectangle(int_fast32_t width, int32_t height, Position pos) : _width(width),
                                                                            _height(height),
                                                                            _left_bottom_corner(pos) {};
 

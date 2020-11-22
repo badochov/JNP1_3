@@ -11,20 +11,20 @@ class Vector {
 public:
     Vector reflection() const;
 
-    uint_fast32_t x() const;
+    int_fast32_t x() const;
 
-    uint_fast32_t y() const;
+    int_fast32_t y() const;
 };
 
 class Position {
 public:
-    Position(uint_fast32_t x, uint_fast32_t y);
+    Position(int_fast32_t x, int_fast32_t y);
 
     Position reflection() const;
 
-    uint_fast32_t x() const;
+    int_fast32_t x() const;
 
-    uint_fast32_t y() const;
+    int_fast32_t y() const;
 
     bool operator==(const Position &rect) const;
 
@@ -33,9 +33,9 @@ public:
 
 class Rectangle {
 public:
-    Rectangle(uint_fast32_t width, uint32_t height);
+    Rectangle(int_fast32_t width, int32_t height);
 
-    Rectangle(uint_fast32_t width, uint32_t height, Position pos);
+    Rectangle(int_fast32_t width, int32_t height, Position pos);
 
     Rectangle(const Rectangle &) = default;
 
