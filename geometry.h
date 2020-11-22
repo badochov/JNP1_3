@@ -29,6 +29,8 @@ public:
     bool operator==(const Position &rect) const;
 
     Position &operator+=(const Vector &vec);
+
+    static const Position &origin();
 };
 
 class Rectangle {
@@ -101,13 +103,8 @@ Rectangle &operator+(const Rectangle &rect, const Vector &vec);
 
 Rectangle &operator+(const Vector &vec, const Rectangle &rect);
 
+Rectangles &&operator+(Rectangles &&rects, const Vector &vec);
 
-Rectangles &operator+(Rectangles &&rects, const Vector &vec);
-
-Rectangles &operator+(const Vector &vec, Rectangles &&rects);
-
-Rectangle &operator+(Rectangle &&rect, const Vector &vec);
-
-Rectangle &operator+(const Vector &vec, Rectangle &&rect);
+Rectangles &&operator+(const Vector &vec, Rectangles &&rects);
 
 #endif //JNP1_3_GEOMETRY_H

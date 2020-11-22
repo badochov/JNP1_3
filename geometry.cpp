@@ -4,23 +4,25 @@
 namespace {
     inline bool can_be_merged_horizontally(const Rectangle &rect1, const Rectangle &rect2) {
         return rect1.width() == rect2.width()
+               && rect1.pos().x() == rect2.pos().x()
                && rect1.pos().y() + rect1.height() == rect2.pos().y();
     }
 
     inline bool can_be_merged_vertically(const Rectangle &rect1, const Rectangle &rect2) {
         return rect1.height() == rect2.height()
+               && rect1.pos().y() == rect2.pos().y()
                && rect1.pos().x() + rect1.width() == rect2.pos().x();
     }
 
     inline Rectangle merge_vertically_helper(const Rectangle &rect1, const Rectangle &rect2) {
-        int_fast32_t new_width = rect1.width();
-        int_fast32_t new_height = rect1.height() + rect2.height();
+        int_fast32_t new_width = rect1.width() + rect2.width();
+        int_fast32_t new_height = rect1.height();
         return Rectangle(new_width, new_height, rect1.pos());
     }
 
     inline Rectangle merge_horizontally_helper(const Rectangle &rect1, const Rectangle &rect2) {
-        int_fast32_t new_width = rect1.width() + rect2.width();
-        int_fast32_t new_height = rect1.height();
+        int_fast32_t new_width = rect1.width();
+        int_fast32_t new_height = rect1.height() + rect2.height();
         return Rectangle(new_width, new_height, rect1.pos());
     }
 }
@@ -105,30 +107,26 @@ Rectangle &operator+(const Vector &vec, const Rectangle &rect) {
     return rect + vec;
 }
 
-Rectangles &operator+(Rectangles &&rects, const Vector &vec) {
-    return rects += vec;
+Rectangles &&operator+(Rectangles &&rects, const Vector &vec) {
+    return std::move(rects += vec);
 }
 
-Rectangles &operator+(const Vector &vec, Rectangles &&rects) {
-    return rects + vec;
-}
-
-Rectangle &operator+(Rectangle &&rect, const Vector &vec) {
-    return rect += vec;
-}
-
-Rectangle &operator+(const Vector &vec, Rectangle &&rect) {
-    return rect + vec;
+Rectangles &&operator+(const Vector &vec, Rectangles &&rects) {
+    return std::move(rects) + vec;
 }
 
 
 Rectangle::Rectangle(int_fast32_t width, int32_t height) : _width(width),
                                                            _height(height),
-                                                           _left_bottom_corner(Position(0, 0)) {};
+                                                           _left_bottom_corner(Position::origin()) {
+    assert(width > 0 && height > 0);
+}
 
 Rectangle::Rectangle(int_fast32_t width, int32_t height, Position pos) : _width(width),
                                                                          _height(height),
-                                                                         _left_bottom_corner(pos) {};
+                                                                         _left_bottom_corner(pos) {
+    assert(width > 0 && height > 0);
+}
 
 bool Rectangle::operator==(const Rectangle &rect) const {
     return this->_left_bottom_corner == rect._left_bottom_corner
