@@ -4,7 +4,7 @@
 namespace {
     inline bool can_be_merged_horizontally(const Rectangle &rect1, const Rectangle &rect2) {
         return rect1.width() == rect2.width()
-               && rect1.pos().y() == rect2.pos().y()
+               && rect1.pos().x() == rect2.pos().x()
                && rect1.pos().y() + rect1.height() == rect2.pos().y();
     }
 
