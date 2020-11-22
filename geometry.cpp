@@ -55,7 +55,7 @@ Position::Position(int_fast32_t x, int_fast32_t y): _vec(x, y) {};
 
 Position::Position(Vector vec): _vec(vec) {};
 
-const Position& Position::origin() {
+const Position &Position::origin() {
     static Position morigin = Position(0, 0);
     return morigin;
 }

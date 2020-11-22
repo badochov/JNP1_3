@@ -45,7 +45,7 @@ public:
 
     Position &operator+=(const Vector &vec);
 
-    static const Position& origin();
+    static const Position &origin();
 
 private:
     Vector _vec;
