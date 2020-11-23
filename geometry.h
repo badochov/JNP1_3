@@ -10,13 +10,15 @@ class Position;
 
 class Vector {
 public:
-    Vector(int_fast32_t x, int_fast32_t y);
+    using coordinate_t = int_fast32_t;
 
-    explicit Vector(Position point);
+    Vector(coordinate_t x, coordinate_t y);
 
-    int_fast32_t x() const;
+    explicit Vector(const Position &point);
 
-    int_fast32_t y() const;
+    coordinate_t x() const;
+
+    coordinate_t y() const;
 
     Vector reflection() const;
 
@@ -25,19 +27,20 @@ public:
     Vector &operator+=(const Vector &other);
 
 private:
-    int_fast32_t _x;
-    int_fast32_t _y;
+    coordinate_t _x;
+    coordinate_t _y;
 };
+
 
 class Position {
 public:
-    Position(int_fast32_t x, int_fast32_t y);
+    Position(Vector::coordinate_t x, Vector::coordinate_t y);
 
-    explicit Position(Vector vec);
+    explicit Position(const Vector &vec);
 
-    int_fast32_t x() const;
+    Vector::coordinate_t x() const;
 
-    int_fast32_t y() const;
+    Vector::coordinate_t y() const;
 
     Position reflection() const;
 
@@ -51,45 +54,41 @@ private:
     Vector _vec;
 };
 
+
 class Rectangle {
 public:
-    Rectangle(int_fast32_t width, int_fast32_t height);
+    using area_t = int64_t;
 
-    Rectangle(int_fast32_t width, int_fast32_t height, Position pos);
+    Rectangle(Vector::coordinate_t width, Vector::coordinate_t height);
 
-    Rectangle(const Rectangle &) = default;
-
-    Rectangle(Rectangle &&) = default;
+    Rectangle(Vector::coordinate_t width, Vector::coordinate_t height, const Position &pos);
 
     bool operator==(const Rectangle &rect) const;
 
     const Position &pos() const;
 
-    int_fast32_t width() const;
+    Vector::coordinate_t width() const;
 
-    int_fast32_t height() const;
+    Vector::coordinate_t height() const;
 
     Rectangle reflection() const;
 
     Rectangle &operator+=(const Vector &vec);
 
-    Rectangle &operator=(const Rectangle &r) = default;
-
-    Rectangle &operator=(Rectangle &&r) = default;
-
-    int_fast64_t area() const;
+    area_t area() const;
 
 private:
     Position _left_bottom_corner;
-    int_fast32_t _width;
-    int_fast32_t _height;
+    Vector::coordinate_t _width;
+    Vector::coordinate_t _height;
 };
+
 
 class Rectangles {
 public:
-    Rectangles() = default;
+    using size_t = std::vector<Rectangle>::size_type;
 
-    Rectangles(const Rectangles &) = default;
+    Rectangles() = default;
 
     Rectangles(std::initializer_list<Rectangle>);
 
@@ -101,15 +100,12 @@ public:
 
     Rectangles &operator+=(const Vector &vec);
 
-    size_t size() const;
-
-    Rectangles &operator=(const Rectangles &rhs) = default;
-
-    Rectangles &operator=(Rectangles &&rhs) noexcept;
+    Rectangles::size_t size() const;
 
 private:
     std::vector<Rectangle> _rects;
 };
+
 
 Rectangle merge_horizontally(const Rectangle &rect1, const Rectangle &rect2);
 
@@ -117,22 +113,23 @@ Rectangle merge_vertically(const Rectangle &rect1, const Rectangle &rect2);
 
 Rectangle merge_all(const Rectangles &rectangles);
 
-Rectangles &operator+(const Rectangles &rects, const Vector &vec);
-
-Rectangles &operator+(const Vector &vec, const Rectangles &rects);
-
-Rectangle &operator+(const Rectangle &rect, const Vector &vec);
-
-Rectangle &operator+(const Vector &vec, const Rectangle &rect);
 
 Rectangles &&operator+(Rectangles &&rects, const Vector &vec);
 
 Rectangles &&operator+(const Vector &vec, Rectangles &&rects);
 
-Vector &operator+(const Vector &vec1, const Vector &vec2);
+Rectangles &operator+(const Rectangles &rects, const Vector &vec);
 
-Position &operator+(const Position &point, const Vector &vec);
+Rectangles &operator+(const Vector &vec, const Rectangles &rects);
 
-Position &operator+(const Vector &vec, const Position &point);
+Rectangle &operator+(Rectangle rect, const Vector &vec);
+
+Rectangle &operator+(const Vector &vec, Rectangle rect);
+
+Vector &operator+(Vector vec1, const Vector &vec2);
+
+Position &operator+(Position point, const Vector &vec);
+
+Position &operator+(const Vector &vec, Position point);
 
 #endif //JNP1_3_GEOMETRY_H
