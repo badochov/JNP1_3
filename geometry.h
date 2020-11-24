@@ -57,7 +57,7 @@ private:
 
 class Rectangle {
 public:
-    using area_t = int64_t;
+    using area_t = uint_fast32_t;
 
     Rectangle(Vector::coordinate_t width, Vector::coordinate_t height);
 
