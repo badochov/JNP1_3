@@ -84,14 +84,6 @@ Position &Position::operator+=(const Vector &vector) {
     return *this;
 }
 
-
-Rectangle::Rectangle(Vector::coordinate_t width, Vector::coordinate_t height) : _width(width),
-                                                                                _height(height),
-                                                                                _left_bottom_corner(
-                                                                                        Position::origin()) {
-    assert(width > 0 && height > 0);
-}
-
 Rectangle::Rectangle(Vector::coordinate_t width, Vector::coordinate_t height, const Position &pos) : _width(width),
                                                                                                      _height(height),
                                                                                                      _left_bottom_corner(
@@ -212,17 +204,21 @@ Rectangle operator+(const Vector &vec, Rectangle rect) {
 }
 
 Rectangles operator+(const Rectangles &rects, const Vector &vec) {
-    return Rectangles(rects) += vec;
+    Rectangles res(rects);
+    res += vec;
+    return res;
 }
 
 Rectangles operator+(const Vector &vec, const Rectangles &rects) {
-    return Rectangles(rects) += vec;
+    return rects + vec;
 }
 
-Rectangles &&operator+(Rectangles &&rects, const Vector &vec) {
-    return std::move(rects += vec);
+Rectangles operator+(Rectangles &&rects, const Vector &vec) {
+    Rectangles res(std::move(rects));
+    res += vec;
+    return res;
 }
 
-Rectangles &&operator+(const Vector &vec, Rectangles &&rects) {
-    return std::move(rects += vec);
+Rectangles operator+(const Vector &vec, Rectangles &&rects) {
+    return std::move(rects) + vec;
 }
