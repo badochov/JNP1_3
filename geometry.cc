@@ -191,31 +191,31 @@ Rectangle merge_all(const Rectangles &rectangles) {
 }
 
 
-Vector &operator+(Vector vec1, const Vector &vec2) {
+Vector operator+(Vector vec1, const Vector &vec2) {
     return vec1 += vec2;
 }
 
-Position &operator+(Position point, const Vector &vec) {
+Position operator+(Position point, const Vector &vec) {
     return point += vec;
 }
 
-Position &operator+(const Vector &vec, Position point) {
+Position operator+(const Vector &vec, Position point) {
     return point += vec;
 }
 
-Rectangle &operator+(Rectangle rect, const Vector &vec) {
+Rectangle operator+(Rectangle rect, const Vector &vec) {
     return rect += vec;
 }
 
-Rectangle &operator+(const Vector &vec, Rectangle rect) {
+Rectangle operator+(const Vector &vec, Rectangle rect) {
     return rect += vec;
 }
 
-Rectangles &operator+(const Rectangles &rects, const Vector &vec) {
+Rectangles operator+(const Rectangles &rects, const Vector &vec) {
     return Rectangles(rects) += vec;
 }
 
-Rectangles &operator+(const Vector &vec, const Rectangles &rects) {
+Rectangles operator+(const Vector &vec, const Rectangles &rects) {
     return Rectangles(rects) += vec;
 }
 

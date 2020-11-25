@@ -2,7 +2,7 @@
 #define JNP1_3_GEOMETRY_H
 
 #include <initializer_list>
-#include <cstddef>
+/* #include <cstddef> */
 #include <vector>
 #include <cstdint>
 
@@ -13,6 +13,10 @@ public:
     using coordinate_t = int_fast32_t;
 
     Vector(coordinate_t x, coordinate_t y);
+
+    Vector(const Vector &other) = default;
+
+    Vector &operator=(const Vector &other) = default;
 
     explicit Vector(const Position &point);
 
@@ -35,6 +39,10 @@ private:
 class Position {
 public:
     Position(Vector::coordinate_t x, Vector::coordinate_t y);
+
+    Position(const Position &other) = default;
+
+    Position &operator=(const Position &other) = default;
 
     explicit Position(const Vector &vec);
 
@@ -63,6 +71,10 @@ public:
 
     Rectangle(Vector::coordinate_t width, Vector::coordinate_t height, const Position &pos);
 
+    Rectangle(const Rectangle &other) = default;
+
+    Rectangle &operator=(const Rectangle &other) = default;
+
     bool operator==(const Rectangle &rect) const;
 
     const Position &pos() const;
@@ -78,9 +90,9 @@ public:
     area_t area() const;
 
 private:
-    Position _left_bottom_corner;
     Vector::coordinate_t _width;
     Vector::coordinate_t _height;
+    Position _left_bottom_corner;
 };
 
 
@@ -91,6 +103,14 @@ public:
     Rectangles() = default;
 
     Rectangles(std::initializer_list<Rectangle>);
+
+    Rectangles(const Rectangles &other) = default;
+
+    Rectangles &operator=(const Rectangles &other) = default;
+
+    Rectangles(Rectangles &&other) = default;
+
+    Rectangles &operator=(Rectangles &&other) = default;
 
     Rectangle &operator[](size_t i);
 
@@ -118,18 +138,18 @@ Rectangles &&operator+(Rectangles &&rects, const Vector &vec);
 
 Rectangles &&operator+(const Vector &vec, Rectangles &&rects);
 
-Rectangles &operator+(const Rectangles &rects, const Vector &vec);
+Rectangles operator+(const Rectangles &rects, const Vector &vec);
 
-Rectangles &operator+(const Vector &vec, const Rectangles &rects);
+Rectangles operator+(const Vector &vec, const Rectangles &rects);
 
-Rectangle &operator+(Rectangle rect, const Vector &vec);
+Rectangle operator+(Rectangle rect, const Vector &vec);
 
-Rectangle &operator+(const Vector &vec, Rectangle rect);
+Rectangle operator+(const Vector &vec, Rectangle rect);
 
-Vector &operator+(Vector vec1, const Vector &vec2);
+Vector operator+(Vector vec1, const Vector &vec2);
 
-Position &operator+(Position point, const Vector &vec);
+Position operator+(Position point, const Vector &vec);
 
-Position &operator+(const Vector &vec, Position point);
+Position operator+(const Vector &vec, Position point);
 
 #endif //JNP1_3_GEOMETRY_H
