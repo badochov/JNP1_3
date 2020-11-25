@@ -138,18 +138,18 @@ Rectangles &&operator+(Rectangles &&rects, const Vector &vec);
 
 Rectangles &&operator+(const Vector &vec, Rectangles &&rects);
 
-Rectangles &operator+(const Rectangles &rects, const Vector &vec);
+Rectangles operator+(const Rectangles &rects, const Vector &vec);
 
-Rectangles &operator+(const Vector &vec, const Rectangles &rects);
+Rectangles operator+(const Vector &vec, const Rectangles &rects);
 
-Rectangle &operator+(Rectangle rect, const Vector &vec);
+Rectangle operator+(Rectangle rect, const Vector &vec);
 
-Rectangle &operator+(const Vector &vec, Rectangle rect);
+Rectangle operator+(const Vector &vec, Rectangle rect);
 
-Vector &operator+(Vector vec1, const Vector &vec2);
+Vector operator+(Vector vec1, const Vector &vec2);
 
-Position &operator+(Position point, const Vector &vec);
+Position operator+(Position point, const Vector &vec);
 
-Position &operator+(const Vector &vec, Position point);
+Position operator+(const Vector &vec, Position point);
 
 #endif //JNP1_3_GEOMETRY_H
