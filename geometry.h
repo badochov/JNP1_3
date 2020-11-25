@@ -2,7 +2,6 @@
 #define JNP1_3_GEOMETRY_H
 
 #include <initializer_list>
-/* #include <cstddef> */
 #include <vector>
 #include <cstdint>
 
@@ -20,11 +19,11 @@ public:
 
     explicit Vector(const Position &point);
 
-    coordinate_t x() const;
+    [[nodiscard]] coordinate_t x() const;
 
-    coordinate_t y() const;
+    [[nodiscard]] coordinate_t y() const;
 
-    Vector reflection() const;
+    [[nodiscard]] Vector reflection() const;
 
     bool operator==(const Vector &other) const;
 
@@ -46,11 +45,11 @@ public:
 
     explicit Position(const Vector &vec);
 
-    Vector::coordinate_t x() const;
+    [[nodiscard]] Vector::coordinate_t x() const;
 
-    Vector::coordinate_t y() const;
+    [[nodiscard]] Vector::coordinate_t y() const;
 
-    Position reflection() const;
+    [[nodiscard]] Position reflection() const;
 
     bool operator==(const Position &other) const;
 
@@ -67,9 +66,7 @@ class Rectangle {
 public:
     using area_t = uint_fast32_t;
 
-    Rectangle(Vector::coordinate_t width, Vector::coordinate_t height);
-
-    Rectangle(Vector::coordinate_t width, Vector::coordinate_t height, const Position &pos);
+    Rectangle(Vector::coordinate_t width, Vector::coordinate_t height, const Position &pos = Position::origin());
 
     Rectangle(const Rectangle &other) = default;
 
@@ -77,17 +74,17 @@ public:
 
     bool operator==(const Rectangle &rect) const;
 
-    const Position &pos() const;
+    [[nodiscard]] const Position &pos() const;
 
-    Vector::coordinate_t width() const;
+    [[nodiscard]] Vector::coordinate_t width() const;
 
-    Vector::coordinate_t height() const;
+    [[nodiscard]] Vector::coordinate_t height() const;
 
-    Rectangle reflection() const;
+    [[nodiscard]] Rectangle reflection() const;
 
     Rectangle &operator+=(const Vector &vec);
 
-    area_t area() const;
+    [[nodiscard]] area_t area() const;
 
 private:
     Vector::coordinate_t _width;
@@ -108,7 +105,7 @@ public:
 
     Rectangles &operator=(const Rectangles &other) = default;
 
-    Rectangles(Rectangles &&other) = default;
+    Rectangles(Rectangles &&other) noexcept = default;
 
     Rectangles &operator=(Rectangles &&other) = default;
 
@@ -120,7 +117,7 @@ public:
 
     Rectangles &operator+=(const Vector &vec);
 
-    Rectangles::size_t size() const;
+    [[nodiscard]] Rectangles::size_t size() const;
 
 private:
     std::vector<Rectangle> _rects;
@@ -134,9 +131,9 @@ Rectangle merge_vertically(const Rectangle &rect1, const Rectangle &rect2);
 Rectangle merge_all(const Rectangles &rectangles);
 
 
-Rectangles &&operator+(Rectangles &&rects, const Vector &vec);
+Rectangles operator+(Rectangles &&rects, const Vector &vec);
 
-Rectangles &&operator+(const Vector &vec, Rectangles &&rects);
+Rectangles operator+(const Vector &vec, Rectangles &&rects);
 
 Rectangles operator+(const Rectangles &rects, const Vector &vec);
 

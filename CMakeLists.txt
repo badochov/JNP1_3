@@ -3,4 +3,4 @@ project(JNP1_3)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(JNP1_3 test2.cpp geometry.cc geometry.h)
+add_executable(JNP1_3 test.cpp geometry.cc geometry.h)
