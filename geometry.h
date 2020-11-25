@@ -90,9 +90,9 @@ public:
     area_t area() const;
 
 private:
-    Position _left_bottom_corner;
     Vector::coordinate_t _width;
     Vector::coordinate_t _height;
+    Position _left_bottom_corner;
 };
 
 
