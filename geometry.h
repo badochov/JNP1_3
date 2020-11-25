@@ -2,7 +2,7 @@
 #define JNP1_3_GEOMETRY_H
 
 #include <initializer_list>
-#include <cstddef>
+/* #include <cstddef> */
 #include <vector>
 #include <cstdint>
 
@@ -13,6 +13,10 @@ public:
     using coordinate_t = int_fast32_t;
 
     Vector(coordinate_t x, coordinate_t y);
+
+    Vector(const Vector &other) = default;
+
+    Vector &operator=(const Vector &other) = default;
 
     explicit Vector(const Position &point);
 
@@ -35,6 +39,10 @@ private:
 class Position {
 public:
     Position(Vector::coordinate_t x, Vector::coordinate_t y);
+
+    Position(const Position &other) = default;
+
+    Position &operator=(const Position &other) = default;
 
     explicit Position(const Vector &vec);
 
@@ -62,6 +70,10 @@ public:
     Rectangle(Vector::coordinate_t width, Vector::coordinate_t height);
 
     Rectangle(Vector::coordinate_t width, Vector::coordinate_t height, const Position &pos);
+
+    Rectangle(const Rectangle &other) = default;
+
+    Rectangle &operator=(const Rectangle &other) = default;
 
     bool operator==(const Rectangle &rect) const;
 
@@ -91,6 +103,14 @@ public:
     Rectangles() = default;
 
     Rectangles(std::initializer_list<Rectangle>);
+
+    Rectangles(const Rectangles &other) = default;
+
+    Rectangles &operator=(const Rectangles &other) = default;
+
+    Rectangles(Rectangles &&other) = default;
+
+    Rectangles &operator=(Rectangles &&other) = default;
 
     Rectangle &operator[](size_t i);
 
