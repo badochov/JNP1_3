@@ -107,7 +107,7 @@ public:
 
     Rectangles(Rectangles &&other) noexcept = default;
 
-    Rectangles &operator=(Rectangles &&other) = default;
+    Rectangles &operator=(Rectangles &&other) noexcept= default;
 
     Rectangle &operator[](size_t i);
 
