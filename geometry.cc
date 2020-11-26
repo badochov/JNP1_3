@@ -119,7 +119,7 @@ Rectangle &Rectangle::operator+=(const Vector &vec) {
 }
 
 Rectangle::area_t Rectangle::area() const {
-    return (Rectangle::area_t) this->width() * this->height();
+    return this->width() * this->height();
 }
 
 
