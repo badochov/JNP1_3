@@ -66,7 +66,9 @@ class Rectangle {
 public:
     using area_t = uint_fast32_t;
 
-    Rectangle(Vector::coordinate_t width, Vector::coordinate_t height, const Position &pos = Position::origin());
+    using dimension_t = int_fast32_t;
+
+    Rectangle(dimension_t width, dimension_t height, const Position &pos = Position::origin());
 
     Rectangle(const Rectangle &other) = default;
 
@@ -76,9 +78,9 @@ public:
 
     [[nodiscard]] const Position &pos() const;
 
-    [[nodiscard]] Vector::coordinate_t width() const;
+    [[nodiscard]] dimension_t width() const;
 
-    [[nodiscard]] Vector::coordinate_t height() const;
+    [[nodiscard]] dimension_t height() const;
 
     [[nodiscard]] Rectangle reflection() const;
 
@@ -105,9 +107,9 @@ public:
 
     Rectangles &operator=(const Rectangles &other) = default;
 
-    Rectangles(Rectangles &&other) noexcept = default;
+    Rectangles(Rectangles &&other) = default;
 
-    Rectangles &operator=(Rectangles &&other) noexcept= default;
+    Rectangles &operator=(Rectangles &&other) = default;
 
     Rectangle &operator[](size_t i);
 
